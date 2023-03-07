@@ -4595,6 +4595,7 @@ export const ES = ObjectAssign({}, ES2022, {
     let startDate = ES.CalendarDateFromFields(calendar, fields);
     const sign = ES.DurationSign(years, months, weeks, days, 0, 0, 0, 0, 0, 0);
     const dateAdd = ES.GetMethod(calendar, 'dateAdd');
+    const Duration = GetIntrinsic('%Temporal.Duration%');
     if (sign < 0) {
       const oneMonthDuration = new Duration(0, 1, 0, 0, 0, 0, 0, 0, 0, 0);
       const nextMonth = ES.CalendarDateAdd(calendar, startDate, oneMonthDuration, undefined, dateAdd);
@@ -4603,7 +4604,6 @@ export const ES = ObjectAssign({}, ES2022, {
       fieldsCopy.day = ES.CalendarDay(calendar, endOfMonth);
       startDate = ES.CalendarDateFromFields(calendar, fieldsCopy);
     }
-    const Duration = GetIntrinsic('%Temporal.Duration%');
     const durationToAdd = new Duration(years, months, weeks, days, 0, 0, 0, 0, 0, 0);
     const optionsCopy = ObjectCreate(null);
     ES.CopyDataProperties(optionsCopy, options, []);
